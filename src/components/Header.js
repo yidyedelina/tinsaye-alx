@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import logo from "../assets/images/logo.png";
 import SupplierPlatform from './modals/SupplierPlatform'
 
-const Header = () => {
+const Header = ({setCoffee, coffee}) => {
 
   const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -65,7 +65,7 @@ const Header = () => {
             </Box>
 
             <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
-              <SupplierPlatform/>
+              <SupplierPlatform setCoffee={setCoffee} coffee={coffee} />
             </Box>
 
             {/* small size */}
@@ -116,7 +116,7 @@ const Header = () => {
                 </MenuItem>
 
                 <MenuItem onClick={handleCloseNavMenu}>
-                  <SupplierPlatform/>
+                  <SupplierPlatform setCoffee={setCoffee} coffee={coffee} />
                 </MenuItem>
               </Menu>
             </Box>

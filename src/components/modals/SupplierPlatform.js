@@ -3,8 +3,15 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Typography, FormControl, Input } from "@mui/material";
 import Button from "@mui/material/Button";
+import coffeeCard from "../CoffeeCard";
 
-export default function SupplierPlatform({formWidth}) {
+export default function SupplierPlatform({ setCoffee, coffee}) {
+  const [cfName, setcfName] = useState("");
+  const [cfPrice, setcfPrice] = useState("");
+  const [cfCategory, setcfCategory] = useState("");
+  const [phNumb, setPhoneNumb] = useState("");
+  const [TgUsername, setTgUsername] = useState("");
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -12,6 +19,25 @@ export default function SupplierPlatform({formWidth}) {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleClick = () => {
+    const data = {
+      name: cfName,
+      price: cfPrice,
+      category: cfCategory,
+      telegram: TgUsername,
+      phone: phNumb
+    }
+    setCoffee([...coffee, data])
+    localStorage.setItem('coffee', JSON.stringify(coffee))
+    setcfName('');
+    setcfCategory('')
+    setcfPrice('')
+    setTgUsername('')
+    setPhoneNumb('')
+    alert('Coffee Data successfully added')
+      handleClose();
+  
+  }
 
   return (
     <>
@@ -49,7 +75,8 @@ export default function SupplierPlatform({formWidth}) {
               required
               id="outlined-adornment-name"
               type="text"
-              placeholder="Coffee Name"
+                  placeholder="Coffee Name"
+                  onChange={(e)=> setcfName(e.target.value)}
             />
         </FormControl>
         <FormControl fullWidth sx={{m:1}} variant="standard">
@@ -57,7 +84,8 @@ export default function SupplierPlatform({formWidth}) {
               required
               id="outlined-adornment-price"
               type="text"
-              placeholder="Coffee Price"
+                  placeholder="Coffee Price"
+                  onChange={(e)=> {setcfPrice(e.target.value)}}
             />
         </FormControl>
         <FormControl fullWidth sx={{ m: 1}} variant="standard">
@@ -65,7 +93,8 @@ export default function SupplierPlatform({formWidth}) {
               required
               id="outlined-adornment-category"
               type="text"
-              placeholder="Coffee Category"
+                  placeholder="Coffee Category"
+                  onChange={(e) => {setcfCategory(e.target.value)}}
             />
         </FormControl>
         <FormControl fullWidth sx={{ m: 1}} variant="standard">
@@ -73,7 +102,8 @@ export default function SupplierPlatform({formWidth}) {
               required
               id="outlined-adornment-phone"
               type="number"
-              placeholder="Phone Number"
+                  placeholder="Phone Number"
+                  onChange={(e) => {setPhoneNumb(e.target.value)}}
             />
         </FormControl>
      
@@ -82,20 +112,21 @@ export default function SupplierPlatform({formWidth}) {
               required
               id="outlined-adornment-telegram"
               type="text"
-              placeholder="Telegram Username"
+                  placeholder="Telegram Username"
+                  onChange={(e) => {setTgUsername(e.target.value)}}
             />
         </FormControl>
         </div>
             
         <Button
             variant="contained"
-            type="submit"
             sx={{
                 my:2,
                 width:'90%',
                 color:'white',
               backgroundColor: "#103037",
             }}
+              onClick={handleClick}
           >
           Post
           </Button>
